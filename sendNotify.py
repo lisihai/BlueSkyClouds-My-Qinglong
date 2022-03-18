@@ -119,6 +119,14 @@ class sendNotify:
     if os.environ['PUSH_PLUS_USER'] != "":
         PUSH_PLUS_USER = os.environ['PUSH_PLUS_USER']
 
+    # go-cqhttp-单独自用
+    if os.environ['GOBOT_URL_qd'] != "":
+        GOBOT_URL = os.environ['GOBOT_URL_qd']
+    if os.environ['GOBOT_QQ_qd'] != "":
+        GOBOT_QQ = os.environ['GOBOT_QQ_qd']
+    if os.environ['GOBOT_TOKEN_qd'] != "":
+        GOBOT_TOKEN = os.environ['GOBOT_TOKEN_qd']
+
     # go-cqhttp
     if os.environ['GOBOT_URL'] != "":
         GOBOT_URL = os.environ['GOBOT_URL']
