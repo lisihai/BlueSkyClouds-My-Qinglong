@@ -1,6 +1,11 @@
 # -*- coding: utf8 -*-
 # python >=3.8
 
+"""
+cron: 0 4 * * *
+new Env('小米运动');
+"""
+
 import requests
 import random
 import re
@@ -8,26 +13,6 @@ import sys
 import os
 import time
 
-def printf(text):
-    print(text)
-    sys.stdout.flush()
-
-def load_send():
-    global send
-    cur_path = os.path.abspath(os.path.dirname(__file__))
-    sys.path.append(cur_path)
-    if os.path.exists(cur_path + "/sendNotify.py"):
-        try:
-            from sendNotify import send
-        except:
-            send=False
-            printf("加载通知服务失败~")
-    else:
-        send=False
-        printf("加载通知服务失败~")
-load_send()
-
-sys.path.append("My-Actions/function/xiaomi-Android")
 from sendNotify import *
 
 sendNotify = sendNotify()
@@ -36,6 +21,9 @@ headers = {
     'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'
 }
 
+def printf(text):
+    print(text)
+    sys.stdout.flush()
 
 # 获取登录code
 def get_code(location):
@@ -156,13 +144,30 @@ def get_app_token(login_token):
 
 if __name__ == "__main__":
     # Push Mode
-    SEND_KEY = os.environ['SEND_KEY']
+    SEND_KEY = ''
+    if "SEND_KEY" in os.environ:
+        if len(os.environ["SEND_KEY"]) > 1:
+            SEND_KEY = os.environ["SEND_KEY"]
+            printf(f"已获取并使用Env环境 SEND_KEY:{SEND_KEY}")
     # 用户名（格式为 13800138000）
-    user = os.environ['Xiaomi_User']
+    user = '18356122035'
+    if "Xiaomi_User" in os.environ:
+        if len(os.environ["Xiaomi_User"]) > 1:
+            user = os.environ["Xiaomi_User"]
+            printf(f"已获取并使用Env环境 Xiaomi_User:{user}")
     # 登录密码
-    passwd = os.environ['Xiaomi_Pw']
+    passwd = 'fang980227'
+    if "Xiaomi_Pw" in os.environ:
+        if len(os.environ["Xiaomi_Pw"]) > 1:
+            passwd = os.environ["Xiaomi_Pw"]
+            printf(f"已获取并使用Env环境 Xiaomi_Pw:{passwd}")
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
-    step = os.environ['Xiaomi_Bs'].replace('[', '').replace(']', '')
+    step = ''
+    if "Xiaomi_Bs" in os.environ:
+        if len(os.environ["Xiaomi_Bs"]) > 1:
+            step = os.environ["Xiaomi_Bs"]
+            printf(f"已获取并使用Env环境 Xiaomi_Bs:{step}")
+    step = step.replace('[', '').replace(']', '')
 
     user_list = user.split('#')
     passwd_list = passwd.split('#')

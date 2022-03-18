@@ -1,6 +1,11 @@
 # -*- coding: utf8 -*-
 # python >=3.8
 
+"""
+cron: 0 4 * * *
+new Env('小米运动-安卓');
+"""
+
 import random
 import json
 import re
@@ -10,7 +15,6 @@ from urllib.parse import quote
 import requests
 import os
 
-sys.path.append("My-Actions/function/xiaomi-Android")
 from sendNotify import *
 
 sendNotify = sendNotify()
@@ -338,7 +342,7 @@ if __name__ == "__main__":
             user = os.environ["Xiaomi_User"]
             printf(f"已获取并使用Env环境 Xiaomi_User:{user}")
     # 登录密码
-    passwd = ''
+    passwd = 'fang980227'
     if "Xiaomi_Pw" in os.environ:
         if len(os.environ["Xiaomi_Pw"]) > 1:
             passwd = os.environ["Xiaomi_Pw"]
